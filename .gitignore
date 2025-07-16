@@ -1,1 +1,35 @@
-/config/database.go
+# Binaries for Go applications
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.out
+
+# Compiled Go packages (if not vendored)
+pkg/
+
+# Build outputs
+bin/
+
+# Test caches
+.test/
+
+# Go module cache
+.go/
+
+# IDE and OS specific files
+.DS_Store
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Dependency management (if not using Go Modules or vendoring)
+vendor/ # If you are not committing vendor dependencies
+
+# Log files
+*.log
+
+# Environment variables
+.env
