@@ -8,7 +8,7 @@ import (
 )
 
 func DatabaseConnect() (*sql.DB, error) {
-	db, err := sql.Open("mysql", "titan:Kasipah19JTitanHome@tcp(103.255.240.5:3148)/titan_hub")
+	db, err := sql.Open("mysql", "username:password@tcp(ip:port)/database")
 	if err != nil {
 		return nil, err
 	}
