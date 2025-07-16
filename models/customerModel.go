@@ -10,7 +10,7 @@ type Customer struct {
 	Customer_Name string
 }
 
-func GetAllCustomers() ([]Customer, error) {
+func GetAllCustomers() ([]*Customer, error) {
 	// start to connect to MySQL database
 	db, err := config.DatabaseConnect()
 	if err != nil {
@@ -23,10 +23,10 @@ func GetAllCustomers() ([]Customer, error) {
 	}
 	defer rows.Close()
 
-	var customers []Customer
+	var customers []*Customer
 
 	for rows.Next() {
-		var cust Customer
+		cust := &Customer{}
 		// Scan data ke struct
 		err := rows.Scan(&cust.ID, &cust.Customer_ID, &cust.Customer_Name)
 		if err != nil {

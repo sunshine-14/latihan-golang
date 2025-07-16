@@ -9,12 +9,12 @@ type Users struct {
 	ID       int
 	Username string
 	Name     string
-	Email    string
-	Phone    string
+	Email    *string
+	Phone    *string
 	Level    string
 }
 
-func GetAllUsers() ([]Users, error) {
+func GetAllUsers() ([]*Users, error) {
 	// panggil db config
 	db, err := config.DatabaseConnect()
 	if err != nil {
@@ -31,28 +31,28 @@ func GetAllUsers() ([]Users, error) {
 	defer rows.Close()
 
 	// variable yg akan direturn
-	var user []Users
+	var users []*Users
 
 	for rows.Next() {
-		var data Users
+		user := &Users{}
 		var email sql.NullString
 		var phone sql.NullString
 
-		err := rows.Scan(&data.ID, &data.Username, &data.Name, &email, &phone, &data.Level)
+		err := rows.Scan(&user.ID, &user.Username, &user.Name, &email, &phone, &user.Level)
 		if err != nil {
 			return nil, err
 		}
 
 		// handling ketika data nullable
 		if email.Valid {
-			data.Email = email.String
+			user.Email = &email.String
 		}
 
 		if phone.Valid {
-			data.Phone = phone.String
+			user.Phone = &phone.String
 		}
-		user = append(user, data)
+		users = append(users, user)
 	}
 
-	return user, nil
+	return users, nil
 }
