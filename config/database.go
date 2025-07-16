@@ -35,6 +35,6 @@ func DatabaseConnect() (*sql.DB, error) {
 		return nil, err
 	}
 
-	fmt.Println("Koneksi ke MySQL berhasil!")
+	fmt.Println("Koneksi ke Database berhasil!")
 	return db, nil
 }
