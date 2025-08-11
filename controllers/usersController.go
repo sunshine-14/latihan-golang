@@ -8,15 +8,22 @@ import (
 
 func ListUser(w http.ResponseWriter, r *http.Request) {
 	users, err := models.GetAllUsers()
+	w.Header().Set("Content-Type", "application/json")
+
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(map[string]interface{}{
+			"message": err.Error(),
+			"status":  "error",
+			"data":    nil,
+		})
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	if err := json.NewEncoder(w).Encode(users); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"message": "Users fetched successfully",
+		"status":  "success",
+		"data":    users,
+	})
 }
