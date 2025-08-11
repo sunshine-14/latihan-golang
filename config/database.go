@@ -24,6 +24,8 @@ func DatabaseConnect() (*sql.DB, error) {
 
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", user, pass, host, port, name)
 
+	log.Println(dsn)
+
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		return nil, err
