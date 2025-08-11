@@ -13,7 +13,7 @@ import (
 func DatabaseConnect() (*sql.DB, error) {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Gagal memuat .env file")
+		log.Println("Gagal memuat .env file")
 	}
 
 	host := os.Getenv("DB_HOST")
